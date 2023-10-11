@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import express from 'express';
 import mongoose from 'mongoose';
 import {router as indexRouter} from './routes/index.js';
+import {router as welcomeRouter} from './routes/welcome.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,7 +21,7 @@ function createApp(): express.Express {
 
     newApp.use(express.static(path.join(__dirname, './public')));
 
-    newApp.use('/', indexRouter);
+    newApp.use('/', indexRouter, welcomeRouter);
 
     return newApp;
 }
