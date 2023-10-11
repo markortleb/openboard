@@ -5,6 +5,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import {router as indexRouter} from './routes/index.js';
 import {router as welcomeRouter} from './routes/welcome.js';
+import {router as signInRouter} from './routes/sign-in.js';
+import {router as signUPRouter} from './routes/sign-up.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,7 +23,7 @@ function createApp(): express.Express {
 
     newApp.use(express.static(path.join(__dirname, './public')));
 
-    newApp.use('/', indexRouter, welcomeRouter);
+    newApp.use('/', indexRouter, welcomeRouter, signInRouter, signUPRouter);
 
     return newApp;
 }
