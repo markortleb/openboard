@@ -5,7 +5,8 @@ interface IUser extends Document{
     userId: string,
     username: string,
     password: string,
-    createdTimestamp: string
+    createdTimestamp: string,
+    lastLoginTimestamp: string
 }
 
 
@@ -14,7 +15,8 @@ const UserSchema = new Schema<IUser> (
         userId: {type: String, required: true},
         username: {type: String, required: true},
         password: {type: String, required: true},
-        createdTimestamp: {type: String, required: true}
+        createdTimestamp: {type: String, required: true},
+        lastLoginTimestamp: {type: String, required: true}
     }
 );
 
