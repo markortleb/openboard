@@ -1,6 +1,7 @@
 import expressAsyncHandler from "express-async-handler";
 import express from "express";
 import {randomUUID} from "crypto";
+import bcrypt from "bcrypt";
 
 import User from "../models/User.js";
 
@@ -35,14 +36,16 @@ const createUser = async (userId: string, username: string, password: string,
 const createUserHandler: express.RequestHandler = expressAsyncHandler(
     async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
         const currentTimestamp = (new Date()).toISOString().slice(0, 19);
-        
-        await createUser(
-            randomUUID(), 
-            req.body.username, 
-            req.body.password, 
-            currentTimestamp, 
-            currentTimestamp
-        );
+
+        bcrypt.hash(req.body.password, 10,async (err, hashedPassword) => {
+            await createUser(
+                randomUUID(), 
+                req.body.username, 
+                hashedPassword, 
+                currentTimestamp, 
+                currentTimestamp
+            );
+        });  
 
         next();
     }
