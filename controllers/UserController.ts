@@ -36,7 +36,6 @@ const createUser = async (userId: string, username: string, password: string,
 const createUserHandler: express.RequestHandler = expressAsyncHandler(
     async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
         const currentTimestamp = (new Date()).toISOString().slice(0, 19);
-
         bcrypt.hash(req.body.password, 10,async (err, hashedPassword) => {
             await createUser(
                 randomUUID(), 
@@ -45,9 +44,11 @@ const createUserHandler: express.RequestHandler = expressAsyncHandler(
                 currentTimestamp, 
                 currentTimestamp
             );
-        });  
 
-        next();
+            req.body.password = hashedPassword;
+
+            next();
+        });
     }
 );
 

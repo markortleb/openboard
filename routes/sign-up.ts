@@ -1,4 +1,5 @@
 import express from 'express';
+import passport from "passport";
 import * as UserController from '../controllers/UserController.js';
 
 
@@ -15,7 +16,8 @@ router.get('/sign-up', function (req, res) {
 router.post('/sign-up',
     UserController.createUserHandler,
     (req, res, next) => {
-        res.redirect('/board');
+        // This will redirect to the sign-in POST route
+        res.redirect(307, '/sign-in');
         next();
     }
 );
