@@ -17,7 +17,11 @@ router.post('/sign-up',
     UserController.createUserHandler,
     (req, res, next) => {
         // This will redirect to the sign-in POST route
-        res.redirect(307, '/sign-in');
+        if (res.locals.isCreated) {
+            res.redirect(307, '/sign-in');
+        } else {
+            res.redirect('/error');
+        }
         next();
     }
 );
