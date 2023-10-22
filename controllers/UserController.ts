@@ -13,12 +13,11 @@ const getByUsername = async (username): Promise<any> => {
 }
 
 
-const createUser = async (userId: string, username: string, password: string, 
+const createUser = async (username: string, password: string, 
     createdTimestamp: string, lastLoginTimestamp: string): Promise<boolean> => {
     let isCreated = false;
     if ((await getByUsername(username)).length === 0) {
         const user = new User({
-            userId: userId,
             username: username,
             password: password,
             createdTimestamp: createdTimestamp,
@@ -40,7 +39,6 @@ const createUserHandler: express.RequestHandler = expressAsyncHandler(
         const currentTimestamp = (new Date()).toISOString().slice(0, 19);
         bcrypt.hash(req.body.password, 10,async (err, hashedPassword) => {
             const isCreated = await createUser(
-                randomUUID(), 
                 req.body.username, 
                 hashedPassword, 
                 currentTimestamp, 

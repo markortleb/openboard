@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Board</title>
+</head>
+<body>
+    <header>
+        <h1>Open Board</h1>
+    </header>
+    <nav>
+        <button onclick="location.href='/create-post'" type="button">Post</button>
+        <button onclick="location.href='/sign-out'" type="button">Sign Out</button>
+    </nav>
+    <main>
+        <form action="/create-post" method="post">
+            <input type="text" name="post" id="post">
+            <button>Post</button>
+        </form>
+    </main>
+</body>
+</html>

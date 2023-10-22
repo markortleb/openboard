@@ -9,7 +9,9 @@ import {router as indexRouter} from './routes/index.js';
 import {router as welcomeRouter} from './routes/welcome.js';
 import {router as signInRouter} from './routes/sign-in.js';
 import {router as signUpRouter} from './routes/sign-up.js';
+import {router as signOutRouter} from './routes/sign-out.js';
 import {router as boardRouter} from './routes/board.js';
+import {router as createPostRouter} from './routes/create-post.js';
 
 dotenv.config();
 
@@ -32,7 +34,16 @@ function createApp(): express.Express {
 
     newApp.use(express.static(path.join(__dirname, './public')));
 
-    newApp.use('/', indexRouter, welcomeRouter, signInRouter, signUpRouter, boardRouter);
+    newApp.use(
+        '/', 
+        indexRouter, 
+        welcomeRouter, 
+        signInRouter, 
+        signUpRouter,
+        signOutRouter,
+        boardRouter,
+        createPostRouter
+    );
 
     return newApp;
 }

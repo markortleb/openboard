@@ -2,7 +2,6 @@ import mongoose, { Schema, model, Document } from "mongoose";
 
 
 interface IUser extends Document{
-    userId: string,
     username: string,
     password: string,
     createdTimestamp: string,
@@ -12,7 +11,6 @@ interface IUser extends Document{
 
 const UserSchema = new Schema<IUser> (
     {
-        userId: {type: String, required: true},
         username: {type: String, required: true},
         password: {type: String, required: true},
         createdTimestamp: {type: String, required: true},
@@ -22,7 +20,7 @@ const UserSchema = new Schema<IUser> (
 
 
 UserSchema.virtual('url').get( function() {
-    return '/user/' + this.userId;
+    return '/user/' + this.username;
 });
 
 const User = model<IUser>('user', UserSchema);
