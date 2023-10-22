@@ -1,13 +1,18 @@
-import express from 'express';
-
+import express from "express";
+import passport from "passport";
 
 const router: express.Router = express.Router();
 
 
-router.get('/welcome', function (req, res) {
-    res.render(
-        'welcome-page'
-    );
+router.get("/welcome", function (req, res) {
+    if (req.isAuthenticated()) {
+        res.redirect("/board");
+    } else {
+        res.render(
+            "welcome-page"
+        );
+    }
+    
 });
 
 
